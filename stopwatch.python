@@ -1,0 +1,50 @@
+import time
+
+def digital_clock():
+    print("Current Time:", time.strftime("%H:%M:%S"))
+
+def stopwatch():
+    seconds = 0
+    running = False
+
+    while True:
+        print("\nMenu:")
+        print("1. Show Current Time")
+        print("2. Start Stopwatch")
+        print("3. Stop Stopwatch")
+        print("4. Reset Stopwatch")
+        print("5. Exit")
+        choice = input("Enter your choice: ")
+
+        if choice == '1':
+            digital_clock()
+
+        elif choice == '2':
+            running = True
+            print("Stopwatch started...")
+            while running:
+                time.sleep(1)
+                seconds += 1
+                mins, secs = divmod(seconds, 60)
+                hrs, mins = divmod(mins, 60)
+                print(f"Time: {hrs:02}:{mins:02}:{secs:02}", end='\r')
+                stop = input("\nPress Enter to stop stopwatch...")
+                if stop == "":
+                    running = False
+
+        elif choice == '3':
+            running = False
+            print("Stopwatch stopped.")
+
+        elif choice == '4':
+            seconds = 0
+            print("Stopwatch reset to 00:00:00")
+
+        elif choice == '5':
+            print("Exiting...")
+            break
+
+        else:
+            print("Invalid choice. Try again.")
+
+stopwatch()
